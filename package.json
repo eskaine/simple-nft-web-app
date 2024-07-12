@@ -1,7 +1,7 @@
 {
   "name": "simple-nft-web-app",
   "scripts": {
-    "node": "npx hardhat node",
+    "node": "npx hardhat node"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^5.0.0",
