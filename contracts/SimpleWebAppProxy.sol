@@ -9,14 +9,16 @@ import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
 
-contract MyToken is Initializable, ERC721Upgradeable, ERC721URIStorageUpgradeable, ERC721PausableUpgradeable, OwnableUpgradeable, UUPSUpgradeable {
-    /// @custom:oz-upgrades-unsafe-allow constructor
+contract SimpleWebAppProxyt is Initializable, ERC721Upgradeable, ERC721URIStorageUpgradeable, ERC721PausableUpgradeable, OwnableUpgradeable, UUPSUpgradeable {
+    uint256 private _tokenIds;
+    mapping(address => uint256[]) public owners;
+
     constructor() {
         _disableInitializers();
     }
 
     function initialize(address initialOwner) initializer public {
-        __ERC721_init("MyToken", "MTK");
+        __ERC721_init("SimpleWebApp", "SWA");
         __ERC721URIStorage_init();
         __ERC721Pausable_init();
         __Ownable_init(initialOwner);
@@ -31,12 +33,20 @@ contract MyToken is Initializable, ERC721Upgradeable, ERC721URIStorageUpgradeabl
         _unpause();
     }
 
-    function safeMint(address to, uint256 tokenId, string memory uri)
+    function createNFT(string memory uri)
         public
         onlyOwner
     {
+        _tokenIds++;
+        _setTokenURI(_tokenIds, uri);
+    }
+
+    function safeMint(address to, uint256 tokenId)
+        public
+        onlyOwner
+    {
+        owners[to].push(tokenId);
         _safeMint(to, tokenId);
-        _setTokenURI(tokenId, uri);
     }
 
     function _authorizeUpgrade(address newImplementation)
