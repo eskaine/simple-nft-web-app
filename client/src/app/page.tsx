@@ -1,9 +1,9 @@
-import Navbar from '@/components/layouts/Navbar';
+import List from '@/components/List';
 
 export default function Home() {
   return (
-    <main>
-      <Navbar />
+    <main className='container mx-auto mb-20 px-36'>
+      <List />
     </main>
   );
 }

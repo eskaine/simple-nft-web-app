@@ -3,7 +3,8 @@
   "scripts": {
     "deploy-local": "npx hardhat ignition deploy ignition/modules/SimpleWebApp.ts --network localhost",
     "node": "npx hardhat node",
-    "pin": "node metadataSeeds/pinningScript.js"
+    "pin": "node metadataSeeds/pinningScript.js",
+    "prepare": "husky"
   },
   "dependencies": {
     "@openzeppelin/contracts-upgradeable": "^5.0.2",
