@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { default as NextHead } from 'next/head';
 import "./globals.css";
 import '@rainbow-me/rainbowkit/styles.css';
+import Navbar from '@/components/layouts/Navbar';
+
 import Providers from "./providers";
 
 export const metadata: Metadata = {
@@ -16,11 +17,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <NextHead>
+      <head>
         <link href="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.css" rel="stylesheet" />
-      </NextHead>
+      </head>
       <body>
         <Providers>
+          <Navbar />
           {children}
         </Providers>
         <script src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>
