@@ -1,0 +1,164 @@
+{
+    "data": [
+        {
+            "name": "Mountain Vista",
+            "description": "A breathtaking view of a mountain range.",
+            "score": 85,
+            "rarity": 10,
+            "image_url": "https://picsum.photos/id/850/250",
+            "attributes": ["Mountain", "Scenic", "Serene"]
+        },
+        {
+            "name": "Forest Path",
+            "description": "A serene path through a dense forest.",
+            "score": 72,
+            "rarity": 8,
+            "image_url": "https://picsum.photos/id/576/250",
+            "attributes": ["Forest", "Waterfall", "Serene"]
+        },
+        {
+            "name": "Desert Dunes",
+            "description": "Rolling dunes in a vast desert.",
+            "score": 90,
+            "rarity": 9,
+            "image_url": "https://picsum.photos/id/810/250",
+            "attributes": ["Snowy", "Mountain", "Scenic"]
+        },
+        {
+            "name": "Ocean Sunset",
+            "description": "A beautiful sunset over the ocean.",
+            "score": 65,
+            "rarity": 7,
+            "image_url": "https://picsum.photos/id/455/250",
+            "attributes": ["Ocean", "Scenic", "Serene"]
+        },
+        {
+            "name": "Countryside Meadow",
+            "description": "A peaceful meadow in the countryside.",
+            "score": 78,
+            "rarity": 6,
+            "image_url": "https://picsum.photos/id/468/250",
+            "attributes": ["Countryside", "Meadow", "Serene"]
+        },
+        {
+            "name": "Mystic Waterfall",
+            "description": "A waterfall with a mystical aura.",
+            "score": 88,
+            "rarity": 10,
+            "image_url": "https://picsum.photos/id/880/250",
+            "attributes": ["Waterfall", "Scenic", "Serene"]
+        },
+        {
+            "name": "Urban Skyline",
+            "description": "A bustling city skyline at night.",
+            "score": 55,
+            "rarity": 5,
+            "image_url": "https://picsum.photos/id/275/250",
+            "attributes": ["Urban", "Scenic", "Mountain"]
+        },
+        {
+            "name": "Ancient Ruins",
+            "description": "Ruins of an ancient civilization.",
+            "score": 92,
+            "rarity": 9,
+            "image_url": "https://picsum.photos/id/828/250",
+            "attributes": ["Meadow", "Countryside", "Scenic"]
+        },
+        {
+            "name": "Modern Park",
+            "description": "A modern park with unique sculptures.",
+            "score": 60,
+            "rarity": 6,
+            "image_url": "https://picsum.photos/id/360/250",
+            "attributes": ["Urban", "Forest", "Scenic"]
+        },
+        {
+            "name": "Tropical Beach",
+            "description": "A pristine beach with crystal clear water.",
+            "score": 80,
+            "rarity": 8,
+            "image_url": "https://picsum.photos/id/640/250",
+            "attributes": ["Snowy", "Urban", "Serene"]
+        },
+        {
+            "name": "Snowy Peak",
+            "description": "A snow-covered mountain peak.",
+            "score": 70,
+            "rarity": 7,
+            "image_url": "https://picsum.photos/id/490/250",
+            "attributes": ["Snowy", "Canyon", "Mountain"]
+        },
+        {
+            "name": "Ancient Temple",
+            "description": "A temple from ancient times.",
+            "score": 95,
+            "rarity": 10,
+            "image_url": "https://picsum.photos/id/950/250",
+            "attributes": ["Forest", "Countryside", "Mountain"]
+        },
+        {
+            "name": "Everyday Park",
+            "description": "A simple park used for everyday relaxation.",
+            "score": 50,
+            "rarity": 5,
+            "image_url": "https://picsum.photos/id/250/250",
+            "attributes": ["Urban", "Waterfall", "Serene"]
+        },
+        {
+            "name": "Healing Springs",
+            "description": "Natural springs known for their healing properties.",
+            "score": 85,
+            "rarity": 9,
+            "image_url": "https://picsum.photos/id/765/250",
+            "attributes": ["Waterfall", "Scenic", "Serene"]
+        },
+        {
+            "name": "Ancient Forest",
+            "description": "A forest with ancient trees and rich history.",
+            "score": 68,
+            "rarity": 6,
+            "image_url": "https://picsum.photos/id/408/250",
+            "attributes": ["Forest", "Canyon", "Scenic"]
+        },
+        {
+            "name": "Rare Garden",
+            "description": "A garden with rare and unique plants.",
+            "score": 75,
+            "rarity": 7,
+            "image_url": "https://picsum.photos/id/525/250",
+            "attributes": ["Snowy", "Forest", "Serene"]
+        },
+        {
+            "name": "Futuristic City",
+            "description": "A city with advanced technology and architecture.",
+            "score": 82,
+            "rarity": 8,
+            "image_url": "https://picsum.photos/id/656/250",
+            "attributes": ["Urban", "Scenic", "Countryside"]
+        },
+        {
+            "name": "Galactic Landscape",
+            "description": "A landscape from a distant galaxy.",
+            "score": 90,
+            "rarity": 9,
+            "image_url": "https://picsum.photos/id/810/250",
+            "attributes": ["Meadow", "Snowy", "Scenic"]
+        },
+        {
+            "name": "Traditional Village",
+            "description": "A village with traditional architecture.",
+            "score": 60,
+            "rarity": 6,
+            "image_url": "https://picsum.photos/id/360/250",
+            "attributes": ["Serene", "Forest", "Mountain"]
+        },
+        {
+            "name": "Rare Canyon",
+            "description": "A canyon with unique rock formations.",
+            "score": 77,
+            "rarity": 7,
+            "image_url": "https://picsum.photos/id/539/250",
+            "attributes": ["Canyon", "Scenic", "Serene"]
+        }
+    ]
+}
