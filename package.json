@@ -2,10 +2,13 @@
   "name": "simple-nft-web-app",
   "scripts": {
     "deploy-local": "npx hardhat ignition deploy ignition/modules/SimpleWebApp.ts --network localhost",
-    "node": "npx hardhat node"
+    "node": "npx hardhat node",
+    "pin": "node metadataSeeds/pinningScript.js"
   },
   "dependencies": {
-    "@openzeppelin/contracts-upgradeable": "^5.0.2"
+    "@openzeppelin/contracts-upgradeable": "^5.0.2",
+    "@pinata/sdk": "^2.1.0",
+    "dotenv": "^16.4.5"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-ethers": "^3.0.6",
