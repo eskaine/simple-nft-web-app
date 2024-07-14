@@ -11,9 +11,7 @@ fs.readFile('./metadataSeeds/metadata.json', 'utf8', (err, fileData) => {
     const { data } = JSON.parse(fileData);
     data.map(async (metadata, i) => {
         const options = {
-            pinataMetadata: {
-                name: `nft${i}.json`
-            }
+            pinataMetadata: metadata
         };
         const res = await pinata.pinJSONToIPFS(metadata, options);
         console.log(res);
