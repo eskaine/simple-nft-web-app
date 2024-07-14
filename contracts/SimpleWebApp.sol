@@ -12,6 +12,7 @@ contract SimpleWebApp is ERC721, ERC721URIStorage, ERC721Pausable, Ownable {
     mapping(uint256 => bool) public tokens;
     // tokens ownership
     mapping(address => uint256[]) public owners;
+    uint256[] public mintedTokens;
 
     // required for subgraph indexing
     event Mint(address indexed _to, uint256 _tokenId, string _uri);
@@ -33,14 +34,19 @@ contract SimpleWebApp is ERC721, ERC721URIStorage, ERC721Pausable, Ownable {
         return owners[owner];
     }
 
+    function getMintedTokens() public view returns (uint256[] memory) {
+        return mintedTokens;
+    }
+
     function mint(address to, uint256 tokenId, string calldata uri)
         public
-        onlyOwner
+        payable
     {
         require(!tokens[tokenId], "Token have been minted already");
 
         tokens[tokenId] = true;
         owners[to].push(tokenId);
+        mintedTokens.push(tokenId);
         _mint(to, tokenId);
         _setTokenURI(tokenId, uri);
 

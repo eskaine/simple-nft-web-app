@@ -3,6 +3,9 @@ import { expect } from "chai";
 import { ethers } from "hardhat";
 
 describe("SimpleWebApp", function () {
+  const uri = "https://ipfs.uri";
+  const tokenId = 3;
+
   async function deploySimpleWebAppFixture() {
     const [owner, otherAccount] = await ethers.getSigners();
 
@@ -23,8 +26,6 @@ describe("SimpleWebApp", function () {
   describe("Minting", function () {
     it("Should be successfully minted", async function () {
       const { simpleWebApp, owner, otherAccount } = await loadFixture(deploySimpleWebAppFixture);
-      const uri = "https://ipfs.uri";
-      const tokenId = 3;
 
       await expect(await simpleWebApp.tokens(tokenId)).to.equal(false);
 
@@ -35,8 +36,6 @@ describe("SimpleWebApp", function () {
 
     it("Minter should received token", async function () {
       const { simpleWebApp, owner, otherAccount } = await loadFixture(deploySimpleWebAppFixture);
-      const uri = "https://ipfs.uri";
-      const tokenId = 3;
 
       await simpleWebApp.connect(owner).mint(otherAccount, tokenId, uri);
       const tokens = await simpleWebApp.getOwnerTokens(otherAccount.address);
@@ -46,8 +45,6 @@ describe("SimpleWebApp", function () {
 
     it("Token cannot be minted repeatedly.", async function () {
       const { simpleWebApp, owner, otherAccount } = await loadFixture(deploySimpleWebAppFixture);
-      const uri = "https://ipfs.uri";
-      const tokenId = 3;
 
       await simpleWebApp.connect(owner).mint(otherAccount, tokenId, uri);
 
@@ -59,8 +56,6 @@ describe("SimpleWebApp", function () {
   describe("Events", function () {
     it("Should emit an event on create NFT", async function () {
       const { simpleWebApp, owner, otherAccount } = await loadFixture(deploySimpleWebAppFixture);
-      const uri = "https://ipfs.uri";
-      const tokenId = 3;
 
       await expect(await simpleWebApp.connect(owner).mint(otherAccount, tokenId, uri))
         .to.emit(simpleWebApp, "Mint")
