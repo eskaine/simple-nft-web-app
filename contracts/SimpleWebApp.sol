@@ -8,12 +8,13 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Pausable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract SimpleWebApp is ERC721, ERC721URIStorage, ERC721Pausable, Ownable {
-    uint256 private _tokenIds;
+    // tokens mint status
+    mapping(uint256 => bool) public tokens;
+    // tokens ownership
     mapping(address => uint256[]) public owners;
 
-    // events are good for subgraph indexing
-    event Create(uint256 _tokenId, string _tokenURI);
-    event Mint(address indexed _to, uint256 _tokenId);
+    // required for subgraph indexing
+    event Mint(address indexed _to, uint256 _tokenId, string _uri);
 
     constructor(address initialOwner)
         ERC721("SimpleWebApp", "SWA")
@@ -28,25 +29,22 @@ contract SimpleWebApp is ERC721, ERC721URIStorage, ERC721Pausable, Ownable {
         _unpause();
     }
 
-    function createNFT(string memory uri)
-        public
-        onlyOwner
-    {
-        _tokenIds++;
-        _setTokenURI(_tokenIds, uri);
-
-        emit Create(_tokenIds, uri);
+    function getOwnerTokens(address owner) public view returns (uint256[] memory) {
+        return owners[owner];
     }
 
-    function safeMint(address to, uint256 tokenId)
+    function mint(address to, uint256 tokenId, string calldata uri)
         public
         onlyOwner
     {
-        require(tokenId <= _tokenIds, "Invalid ID");
-        owners[to].push(tokenId);
-        _safeMint(to, tokenId);
+        require(!tokens[tokenId], "Token have been minted already");
 
-        emit Mint(to, tokenId);
+        tokens[tokenId] = true;
+        owners[to].push(tokenId);
+        _mint(to, tokenId);
+        _setTokenURI(tokenId, uri);
+
+        emit Mint(to, tokenId, uri);
     }
 
     // The following functions are overrides required by Solidity.

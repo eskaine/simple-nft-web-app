@@ -1,6 +1,7 @@
 {
     "data": [
         {
+            "id": 1,
             "name": "Mountain Vista",
             "description": "A breathtaking view of a mountain range.",
             "score": 85,
@@ -9,6 +10,7 @@
             "attributes": ["Mountain", "Scenic", "Serene"]
         },
         {
+            "id": 2,
             "name": "Forest Path",
             "description": "A serene path through a dense forest.",
             "score": 72,
@@ -17,14 +19,16 @@
             "attributes": ["Forest", "Waterfall", "Serene"]
         },
         {
+            "id": 3,
             "name": "Desert Dunes",
             "description": "Rolling dunes in a vast desert.",
             "score": 90,
             "rarity": 9,
-            "image_url": "https://picsum.photos/id/810/250",
+            "image_url": "https://picsum.photos/id/620/250",
             "attributes": ["Snowy", "Mountain", "Scenic"]
         },
         {
+            "id": 4,
             "name": "Ocean Sunset",
             "description": "A beautiful sunset over the ocean.",
             "score": 65,
@@ -33,6 +37,7 @@
             "attributes": ["Ocean", "Scenic", "Serene"]
         },
         {
+            "id": 5,
             "name": "Countryside Meadow",
             "description": "A peaceful meadow in the countryside.",
             "score": 78,
@@ -41,6 +46,7 @@
             "attributes": ["Countryside", "Meadow", "Serene"]
         },
         {
+            "id": 6,
             "name": "Mystic Waterfall",
             "description": "A waterfall with a mystical aura.",
             "score": 88,
@@ -49,6 +55,7 @@
             "attributes": ["Waterfall", "Scenic", "Serene"]
         },
         {
+            "id": 7,
             "name": "Urban Skyline",
             "description": "A bustling city skyline at night.",
             "score": 55,
@@ -57,6 +64,7 @@
             "attributes": ["Urban", "Scenic", "Mountain"]
         },
         {
+            "id": 8,
             "name": "Ancient Ruins",
             "description": "Ruins of an ancient civilization.",
             "score": 92,
@@ -65,14 +73,16 @@
             "attributes": ["Meadow", "Countryside", "Scenic"]
         },
         {
+            "id": 9,
             "name": "Modern Park",
             "description": "A modern park with unique sculptures.",
             "score": 60,
             "rarity": 6,
-            "image_url": "https://picsum.photos/id/360/250",
+            "image_url": "https://picsum.photos/id/160/250",
             "attributes": ["Urban", "Forest", "Scenic"]
         },
         {
+            "id": 10,
             "name": "Tropical Beach",
             "description": "A pristine beach with crystal clear water.",
             "score": 80,
@@ -81,6 +91,7 @@
             "attributes": ["Snowy", "Urban", "Serene"]
         },
         {
+            "id": 11,
             "name": "Snowy Peak",
             "description": "A snow-covered mountain peak.",
             "score": 70,
@@ -89,6 +100,7 @@
             "attributes": ["Snowy", "Canyon", "Mountain"]
         },
         {
+            "id": 12,
             "name": "Ancient Temple",
             "description": "A temple from ancient times.",
             "score": 95,
@@ -97,6 +109,7 @@
             "attributes": ["Forest", "Countryside", "Mountain"]
         },
         {
+            "id": 13,
             "name": "Everyday Park",
             "description": "A simple park used for everyday relaxation.",
             "score": 50,
@@ -105,6 +118,7 @@
             "attributes": ["Urban", "Waterfall", "Serene"]
         },
         {
+            "id": 14,
             "name": "Healing Springs",
             "description": "Natural springs known for their healing properties.",
             "score": 85,
@@ -113,6 +127,7 @@
             "attributes": ["Waterfall", "Scenic", "Serene"]
         },
         {
+            "id": 15,
             "name": "Ancient Forest",
             "description": "A forest with ancient trees and rich history.",
             "score": 68,
@@ -121,6 +136,7 @@
             "attributes": ["Forest", "Canyon", "Scenic"]
         },
         {
+            "id": 16,
             "name": "Rare Garden",
             "description": "A garden with rare and unique plants.",
             "score": 75,
@@ -129,6 +145,7 @@
             "attributes": ["Snowy", "Forest", "Serene"]
         },
         {
+            "id": 17,
             "name": "Futuristic City",
             "description": "A city with advanced technology and architecture.",
             "score": 82,
@@ -137,6 +154,7 @@
             "attributes": ["Urban", "Scenic", "Countryside"]
         },
         {
+            "id": 18,
             "name": "Galactic Landscape",
             "description": "A landscape from a distant galaxy.",
             "score": 90,
@@ -145,6 +163,7 @@
             "attributes": ["Meadow", "Snowy", "Scenic"]
         },
         {
+            "id": 19,
             "name": "Traditional Village",
             "description": "A village with traditional architecture.",
             "score": 60,
@@ -153,6 +172,7 @@
             "attributes": ["Serene", "Forest", "Mountain"]
         },
         {
+            "id": 20,
             "name": "Rare Canyon",
             "description": "A canyon with unique rock formations.",
             "score": 77,
