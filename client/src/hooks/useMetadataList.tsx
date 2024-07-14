@@ -1,18 +1,21 @@
-import { IMetadata } from '@/app/types/metadata.type';
+import { IMetadata } from '@/types/metadata.type';
+import { PinataResponse } from '@/types/pinataResponse.type';
 import { useCallback, useEffect, useState } from 'react';
 
 export default function useNftMetadata() {
   const pinataGateway = 'https://gateway.pinata.cloud/ipfs/';
+  const pinataApi = 'https://api.pinata.cloud/data/pinList';
   const [nftMetadata, setNftMetadata] = useState<IMetadata[]>([]);
 
-  async function getBatchData(metadataList: string[]): Promise<IMetadata[]> {
+  async function getBatchData(metadataList: PinataResponse[]): Promise<IMetadata[]> {
     return Promise.all(
       metadataList.map(
-        (url) =>
+        (file) =>
           new Promise(async (resolve) => {
-            const cid = url.match(/^ipfs:\/\/([a-zA-Z0-9]+)$/)?.[1];
-            const res = await fetch(pinataGateway + cid);
-            const metadata: IMetadata[] = await res.json();
+            const res = await fetch(pinataGateway + file.ipfs_pin_hash);
+            let metadata: IMetadata = await res.json();
+            metadata.ipfs_url = `ipfs://${file.ipfs_pin_hash}`;
+
             resolve(metadata);
           })
       )
@@ -21,10 +24,23 @@ export default function useNftMetadata() {
 
   const getMetadataList = useCallback(async () => {
     try {
-      const url = pinataGateway + 'QmPxiyguHbuFvrpSzzoN1g4jQGyF7p788c7pdXMMUqKvU7';
-      const res = await fetch(url);
-      const { links: metadataList } = await res.json();
-      const batchMetadata: IMetadata[] = await getBatchData(metadataList);
+      const groupId = '03961f77-231c-427d-b851-c3050d2659dc';
+      const pageLimit = 20;
+      const queryFilters = `?groupId=${groupId}&pageLimit=${pageLimit}`;
+
+      const options = {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${process.env.pinataJwt}`,
+        },
+      };
+
+      // get a list of available nft metadata cid
+      const res = await fetch(pinataApi + queryFilters, options);
+      const { rows: metadataList } = await res.json();
+
+      // get metadata json with cid
+      let batchMetadata: IMetadata[] = await getBatchData(metadataList);
       setNftMetadata(batchMetadata);
     } catch (error) {
       throw new Error('Failed to fetch data');

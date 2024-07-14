@@ -1,13 +1,14 @@
 import { getDefaultConfig } from '@rainbow-me/rainbowkit';
 import { http } from 'wagmi';
-import { mainnet, sepolia } from 'wagmi/chains';
+import { localhost, sepolia, polygonAmoy } from 'wagmi/chains';
 export const config = getDefaultConfig({
-  appName: 'My RainbowKit App',
-  projectId: 'YOUR_PROJECT_ID',
-  chains: [mainnet, sepolia],
+  appName: 'Simple Web App',
+  projectId: 'simple_web_app',
+  chains: [localhost, sepolia, polygonAmoy],
   transports: {
-    [mainnet.id]: http('https://eth-mainnet.g.alchemy.com/v2/...'),
-    [sepolia.id]: http('https://eth-sepolia.g.alchemy.com/v2/...'),
+    [localhost.id]: http(),
+    // [sepolia.id]: http('https://eth-sepolia.g.alchemy.com/v2/...'),
+    // [polygon.id]: http('https://eth-sepolia.g.alchemy.com/v2/...'),
   },
   ssr: true,
 });
