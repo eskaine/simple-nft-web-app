@@ -3,61 +3,61 @@
 import Image from 'next/image';
 import { IMetadata } from '@/types/metadata.type';
 import { useWriteContract, useAccount } from 'wagmi';
-import { estimateFeesPerGas } from '@wagmi/core';
-import { abi } from '../../../artifacts/contracts/SimpleWebApp.sol/SimpleWebApp.json';
+import { abi } from '../abi';
 import { MouseEvent } from 'react';
-import { contractAddress } from '@/constants';
-import { config } from '@/wagmi';
-import { parseGwei } from 'viem';
+import { CONTRACT_ADDRESS } from '@/constants';
+import { CHAINS } from '@/types/enums';
 
 interface Props {
   metadata: IMetadata;
   isLogin: boolean;
-  callback?: Function;
   hideMintButton?: boolean;
+  isSmallCard?: boolean;
 }
 
-export default function NFTCard({ metadata, isLogin, callback, hideMintButton = false }: Props) {
-  const { address: to } = useAccount();
+export default function NFTCard({
+  metadata,
+  isLogin,
+  hideMintButton = false,
+  isSmallCard = true,
+}: Props) {
+  const { address: to, chain } = useAccount();
   const { writeContract } = useWriteContract();
-  const { id, name, description, image_url, ipfs_url } = metadata;
+  const { id, ipfs_url } = metadata;
 
   async function handleMint(e: MouseEvent<HTMLAnchorElement>) {
     e.preventDefault();
 
-    const data = await estimateFeesPerGas(config);
-
-    writeContract(
-      {
-        abi,
-        address: contractAddress,
-        functionName: 'mint',
-        value: parseGwei('2'),
-        args: [to, id, ipfs_url],
-        maxFeePerGas: data?.maxFeePerGas,
-        maxPriorityFeePerGas: data?.maxPriorityFeePerGas,
-      },
-      {
-        onSuccess: async (x) => {
-          if (callback) {
-            await callback(to);
-          }
-        },
-      }
-    );
+    writeContract({
+      abi,
+      address: `0x${CONTRACT_ADDRESS[chain!.name]}`,
+      functionName: 'mint',
+      args: [to, id, ipfs_url],
+    });
   }
 
   return (
     <div className='max-w-[200px] justify-self-center rounded-lg border border-gray-200 bg-white text-center shadow dark:border-gray-700 dark:bg-gray-800'>
-      <Image className='rounded-t-lg' src={image_url} width={200} height={200} alt={name} />
+      <Image
+        className='rounded-t-lg'
+        src={metadata.image_url}
+        width={200}
+        height={200}
+        alt={metadata.name}
+      />
       <div
-        className={`h-${callback ? 32 : 24} x-3 flex flex-col items-center justify-between py-3`}
+        className={`${isSmallCard ? 'h-28' : 'h-[150px]'} x-3 flex flex-col items-center justify-between py-3`}
       >
         <div className='px-2'>
           <p className='mb-2 text-sm font-bold tracking-tight text-gray-900 dark:text-white'>
-            {`${name} #${id}`}
+            {`${metadata.name} #${metadata.id} `}
+
+            <br />
+            <span className='text-xs font-medium italic'>{`${metadata.attributes.join(' ')}, ${metadata.score}`}</span>
           </p>
-          <p className='mb-3 text-xs font-normal text-gray-700 dark:text-gray-400'>{description}</p>
+          <p className='mb-3 text-xs font-normal text-gray-700 dark:text-gray-400'>
+            {metadata.description}
+          </p>
         </div>
         {isLogin && !hideMintButton && (
           <a
@@ -67,6 +67,13 @@ export default function NFTCard({ metadata, isLogin, callback, hideMintButton = 
           >
             Mint
           </a>
+        )}
+        {isLogin && metadata.chainName && (
+          <div
+            className={`rounded-lg ${metadata.chainName === CHAINS.SEPOLIA ? 'bg-zinc-600' : 'bg-violet-600'} px-4 py-1.5 text-center text-sm text-white`}
+          >
+            {metadata.chainName}
+          </div>
         )}
       </div>
     </div>
