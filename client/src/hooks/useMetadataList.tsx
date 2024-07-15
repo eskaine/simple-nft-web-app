@@ -6,6 +6,11 @@ export default function useNftMetadata() {
   const pinataGateway = 'https://gateway.pinata.cloud/ipfs/';
   const pinataApi = 'https://api.pinata.cloud/data/pinList';
   const [nftMetadata, setNftMetadata] = useState<IMetadata[]>([]);
+  const [filteredMetadata, setFilteredMetadata] = useState<IMetadata[]>([]);
+
+  function updateFilteredMetadata(nftMetadata: IMetadata[]) {
+    setFilteredMetadata(nftMetadata);
+  }
 
   async function getBatchData(metadataList: PinataResponse[]): Promise<IMetadata[]> {
     return Promise.all(
@@ -53,5 +58,7 @@ export default function useNftMetadata() {
 
   return {
     nftMetadata,
+    filteredMetadata,
+    updateFilteredMetadata,
   };
 }
