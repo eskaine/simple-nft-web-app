@@ -1,3 +1,5 @@
+import { CHAINS } from './enums';
+
 export interface IMetadata {
   id: number;
   name: string;
@@ -8,4 +10,5 @@ export interface IMetadata {
   score: number;
   attributes: string[];
   isMinted?: boolean;
+  chainName?: CHAINS;
 }

@@ -1,3 +1,4 @@
+import { METADATA_GROUP_ID } from '@/constants';
 import { IMetadata } from '@/types/metadata.type';
 import { PinataResponse } from '@/types/pinataResponse.type';
 import { useCallback, useEffect, useState } from 'react';
@@ -29,9 +30,8 @@ export default function useNftMetadata() {
 
   const getMetadataList = useCallback(async () => {
     try {
-      const groupId = '03961f77-231c-427d-b851-c3050d2659dc';
       const pageLimit = 20;
-      const queryFilters = `?groupId=${groupId}&pageLimit=${pageLimit}`;
+      const queryFilters = `?groupId=${METADATA_GROUP_ID}&pageLimit=${pageLimit}`;
 
       const options = {
         method: 'GET',
