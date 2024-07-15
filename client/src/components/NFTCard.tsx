@@ -2,10 +2,13 @@
 
 import Image from 'next/image';
 import { IMetadata } from '@/types/metadata.type';
-import { useWriteContract, useAccount, useEstimateGas, useEstimateFeesPerGas } from 'wagmi';
+import { useWriteContract, useAccount } from 'wagmi';
+import { estimateFeesPerGas } from '@wagmi/core';
 import { abi } from '../../../artifacts/contracts/SimpleWebApp.sol/SimpleWebApp.json';
 import { MouseEvent } from 'react';
 import { contractAddress } from '@/constants';
+import { config } from '@/wagmi';
+import { parseGwei } from 'viem';
 
 interface Props {
   metadata: IMetadata;
@@ -17,22 +20,19 @@ interface Props {
 export default function NFTCard({ metadata, isLogin, callback, hideMintButton = false }: Props) {
   const { address: to } = useAccount();
   const { writeContract } = useWriteContract();
-  const { data } = useEstimateFeesPerGas();
-  const { data: estimatedGas } = useEstimateGas({
-    account: to,
-    to: contractAddress,
-  });
   const { id, name, description, image_url, ipfs_url } = metadata;
 
-  function handleMint(e: MouseEvent<HTMLAnchorElement>) {
+  async function handleMint(e: MouseEvent<HTMLAnchorElement>) {
     e.preventDefault();
+
+    const data = await estimateFeesPerGas(config);
 
     writeContract(
       {
         abi,
         address: contractAddress,
         functionName: 'mint',
-        value: estimatedGas,
+        value: parseGwei('2'),
         args: [to, id, ipfs_url],
         maxFeePerGas: data?.maxFeePerGas,
         maxPriorityFeePerGas: data?.maxPriorityFeePerGas,
