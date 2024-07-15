@@ -5,13 +5,15 @@ pragma solidity ^0.8.20;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Pausable.sol";
+import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract SimpleWebApp is ERC721, ERC721URIStorage, ERC721Pausable, Ownable {
+contract SimpleWebApp is ERC721, ERC721URIStorage, ERC721Pausable, Ownable, ReentrancyGuard {
     // tokens mint status
     mapping(uint256 => bool) public tokens;
     // tokens ownership
     mapping(address => uint256[]) public owners;
+    // keep track of minted tokens
     uint256[] public mintedTokens;
 
     // required for subgraph indexing
@@ -30,17 +32,16 @@ contract SimpleWebApp is ERC721, ERC721URIStorage, ERC721Pausable, Ownable {
         _unpause();
     }
 
-    function getOwnerTokens(address owner) public view returns (uint256[] memory) {
+    function getOwnerTokens(address owner) external view returns (uint256[] memory) {
         return owners[owner];
     }
 
-    function getMintedTokens() public view returns (uint256[] memory) {
+    function getMintedTokens() external view returns (uint256[] memory) {
         return mintedTokens;
     }
 
     function mint(address to, uint256 tokenId, string calldata uri)
         public
-        payable
     {
         require(!tokens[tokenId], "Token have been minted already");
 

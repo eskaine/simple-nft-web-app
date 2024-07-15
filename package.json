@@ -1,7 +1,7 @@
 {
   "name": "simple-nft-web-app",
   "scripts": {
-    "deploy-local": "npx hardhat ignition deploy ignition/modules/SimpleWebApp.ts --network localhost",
+    "deploy": "npx hardhat ignition deploy ignition/modules/SimpleWebApp.ts --network",
     "node": "npx hardhat node",
     "pin": "node metadataSeeds/pinningScript.js",
     "lint": "solhint 'contracts/**/*.sol'"
