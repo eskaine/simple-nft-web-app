@@ -12,6 +12,7 @@ interface Props {
   metadata: IMetadata;
   isLogin: boolean;
   hideMintButton?: boolean;
+  hideCard?: boolean;
   isSmallCard?: boolean;
 }
 
@@ -19,6 +20,7 @@ export default function NFTCard({
   metadata,
   isLogin,
   hideMintButton = false,
+  hideCard = false,
   isSmallCard = true,
 }: Props) {
   const { address: to, chain } = useAccount();
@@ -34,6 +36,10 @@ export default function NFTCard({
       functionName: 'mint',
       args: [to, id, ipfs_url],
     });
+  }
+
+  if (hideCard) {
+    return <></>;
   }
 
   return (
@@ -53,7 +59,8 @@ export default function NFTCard({
             {`${metadata.name} #${metadata.id} `}
 
             <br />
-            <span className='text-xs font-medium italic'>{`${metadata.attributes.join(' ')}, ${metadata.score}`}</span>
+            <span className='text-xs font-medium italic'>{`${metadata.attributes.join(' ')}, `}</span>
+            <span className='text-xs font-bold italic text-blue-500'>{metadata.score}</span>
           </p>
           <p className='mb-3 text-xs font-normal text-gray-700 dark:text-gray-400'>
             {metadata.description}
