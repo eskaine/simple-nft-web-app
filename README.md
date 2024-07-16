@@ -2,6 +2,10 @@
 
 This is a simple project built on the assumption that a factory pattern and/or collection design is unnecessary.
 
+### Testnets
+- Ethereum Sepholia ([Etherscan](https://sepolia.etherscan.io/address/0xA8b211fEFE8E11d2fFedEe0A6CDE01bF55510069))
+- Polygon Amoy ([Polygonscan](https://amoy.polygonscan.com/address/0xA8b211fEFE8E11d2fFedEe0A6CDE01bF55510069))
+
 ### Requirements
 User is able to mint NFTs on at least 2 different chains. And a total score will be derived from all NFTs owned by user existing on either chains.
 
