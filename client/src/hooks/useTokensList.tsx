@@ -35,33 +35,38 @@ export default function useTokensList(nftMetadata: IMetadata[]) {
   }
 
   async function getUserOwnedMetadatas(ownerAddress: string): Promise<IMetadata[]> {
-    // fetch user owned tokens
-    const results = await fetchMultiChainData<Array<number[]>>({
-      functionName: ContractGetFunctions.GET_OWNER_TOKENS,
-      args: [ownerAddress],
-    });
+    try {
+      // fetch user owned tokens
+      const results = await fetchMultiChainData<Array<number[]>>({
+        functionName: ContractGetFunctions.GET_OWNER_TOKENS,
+        args: [ownerAddress],
+      });
 
-    // filter user owned metadata
-    return nftMetadata.reduce((resultArr, metadata) => {
-      const sepoliaIndex = results[0].findIndex((id) => id == metadata.id);
-      const polygonAmoyIndex = results[1].findIndex((id) => id == metadata.id);
+      // filter user owned metadata from both chains
+      return nftMetadata.reduce((resultArr, metadata) => {
+        const sepoliaIndex = results[0].findIndex((id) => id == metadata.id);
+        const polygonAmoyIndex = results[1].findIndex((id) => id == metadata.id);
 
-      let updatedMetadata = { ...metadata };
+        let updatedMetadata = { ...metadata };
 
-      if (sepoliaIndex >= 0) {
-        updatedMetadata.chainName = CHAINS.SEPOLIA;
-      }
+        if (sepoliaIndex >= 0) {
+          updatedMetadata.chainName = CHAINS.SEPOLIA;
+        }
 
-      if (polygonAmoyIndex >= 0) {
-        updatedMetadata.chainName = CHAINS.POLYGON_AMOY;
-      }
+        if (polygonAmoyIndex >= 0) {
+          updatedMetadata.chainName = CHAINS.POLYGON_AMOY;
+        }
 
-      if (sepoliaIndex >= 0 || polygonAmoyIndex >= 0) {
-        return [...resultArr, updatedMetadata];
-      }
+        if (sepoliaIndex >= 0 || polygonAmoyIndex >= 0) {
+          return [...resultArr, updatedMetadata];
+        }
 
-      return resultArr;
-    }, [] as IMetadata[]);
+        return resultArr;
+      }, [] as IMetadata[]);
+    } catch (error) {
+      // instead of return empty array, throw and redirect to 404
+      return [];
+    }
   }
 
   const getMintedTokens = useCallback(async () => {

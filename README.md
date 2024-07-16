@@ -2,7 +2,8 @@
 
 This is a simple project built on the assumption that a factory pattern and/or collection design is unnecessary.
 
-### Testnets
+### Links
+- [Frontend](https://simple-nft-web-app.vercel.app/)
 - Ethereum Sepholia ([Etherscan](https://sepolia.etherscan.io/address/0xA8b211fEFE8E11d2fFedEe0A6CDE01bF55510069))
 - Polygon Amoy ([Polygonscan](https://amoy.polygonscan.com/address/0xA8b211fEFE8E11d2fFedEe0A6CDE01bF55510069))
 

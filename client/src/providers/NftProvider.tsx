@@ -35,11 +35,16 @@ export const NftProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     setFilteredMetadata(userMetadatas);
   }
 
+  // to watch for sepolia minting events so as to automatically update the state
   useWatchContractEvent({
     address: `0x${CONTRACT_ADDRESS[CHAINS.SEPOLIA]}`,
     abi,
     eventName: ContractEvents.MINT,
     onLogs() {
+
+      // success toast trigger
+      // on receive mint event, to trigger toast here to provide success feedback to user
+
       if (isConnected) {
         getUserOwnedMetadatas(address as string);
         getMintedTokens();
@@ -47,11 +52,16 @@ export const NftProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     },
   });
 
+  // to watch for amoy minting events so as to automatically update the state
   useWatchContractEvent({
     address: `0x${CONTRACT_ADDRESS[CHAINS.POLYGON_AMOY]}`,
     abi,
     eventName: ContractEvents.MINT,
     onLogs() {
+
+      // success toast trigger
+      // on receive mint event, to trigger toast here to provide success feedback to user
+
       if (isConnected) {
         getUserOwnedMetadatas(address as string);
         getMintedTokens();
