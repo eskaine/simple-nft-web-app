@@ -9,10 +9,6 @@ export default function useNftMetadata() {
   const [nftMetadata, setNftMetadata] = useState<IMetadata[]>([]);
   const [filteredMetadata, setFilteredMetadata] = useState<IMetadata[]>([]);
 
-  function updateFilteredMetadata(nftMetadata: IMetadata[]) {
-    setFilteredMetadata(nftMetadata);
-  }
-
   async function getBatchData(metadataList: PinataResponse[]): Promise<IMetadata[]> {
     return Promise.all(
       metadataList.map(
@@ -59,6 +55,6 @@ export default function useNftMetadata() {
   return {
     nftMetadata,
     filteredMetadata,
-    updateFilteredMetadata,
+    setFilteredMetadata,
   };
 }

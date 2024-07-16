@@ -1,7 +1,7 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { readContract } from '@wagmi/core';
 import { config } from '@/wagmi';
-import { CHAINS, ContractGetFunction } from '@/types/enums';
+import { CHAINS, ContractGetFunctions } from '@/types/enums';
 import { IMetadata } from '@/types/metadata.type';
 import { CONTRACT_ADDRESS } from '@/constants';
 import { abi } from '../abi';
@@ -12,13 +12,8 @@ interface ChainParam {
   args?: Array<any>;
 }
 
-export default function useTokensList(nftMetadata: IMetadata[], filterCallback: Function) {
+export default function useTokensList(nftMetadata: IMetadata[]) {
   const [mintedTokens, setMintedTokens] = useState<Set<number>>(new Set());
-
-  function updateTokens(id: number) {
-    const updatedTokens = [...Array.from(mintedTokens), id];
-    setMintedTokens(new Set(updatedTokens));
-  }
 
   async function fetchMultiChainData<DataResponse>(params: ChainParam): Promise<DataResponse> {
     return Promise.all([
@@ -39,15 +34,15 @@ export default function useTokensList(nftMetadata: IMetadata[], filterCallback: 
     ]) as DataResponse;
   }
 
-  async function getUserOwnedTokens(ownerAddress: string, chainName: string) {
+  async function getUserOwnedMetadatas(ownerAddress: string): Promise<IMetadata[]> {
     // fetch user owned tokens
     const results = await fetchMultiChainData<Array<number[]>>({
-      functionName: ContractGetFunction.GET_OWNER_TOKENS,
+      functionName: ContractGetFunctions.GET_OWNER_TOKENS,
       args: [ownerAddress],
     });
 
     // filter user owned metadata
-    const filteredMetadata = nftMetadata.reduce((resultArr, metadata) => {
+    return nftMetadata.reduce((resultArr, metadata) => {
       const sepoliaIndex = results[0].findIndex((id) => id == metadata.id);
       const polygonAmoyIndex = results[1].findIndex((id) => id == metadata.id);
 
@@ -67,29 +62,21 @@ export default function useTokensList(nftMetadata: IMetadata[], filterCallback: 
 
       return resultArr;
     }, [] as IMetadata[]);
-
-    // set data
-    filterCallback(filteredMetadata);
   }
 
   const getMintedTokens = useCallback(async () => {
     // fetch minted tokens
     const results = await fetchMultiChainData<Array<number[]>>({
-      functionName: ContractGetFunction.GET_MINTED_TOKENS,
+      functionName: ContractGetFunctions.GET_MINTED_TOKENS,
     });
 
     // merge both data into a set
     setMintedTokens(new Set([...results[0], ...results[1]]));
   }, []);
 
-  useEffect(() => {
-    getMintedTokens();
-  }, [getMintedTokens]);
-
   return {
     mintedTokens,
-    getUserOwnedTokens,
+    getUserOwnedMetadatas,
     getMintedTokens,
-    updateTokens,
   };
 }
