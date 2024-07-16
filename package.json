@@ -2,6 +2,7 @@
   "name": "simple-nft-web-app",
   "scripts": {
     "deploy": "npx hardhat ignition deploy ignition/modules/SimpleWebApp.ts --network",
+    "verify": "npx hardhat ignition verify",
     "node": "npx hardhat node",
     "pin": "node metadataSeeds/pinningScript.js",
     "lint": "solhint 'contracts/**/*.sol'"
