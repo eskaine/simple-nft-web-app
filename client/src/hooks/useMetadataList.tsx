@@ -44,7 +44,9 @@ export default function useNftMetadata() {
       let batchMetadata: IMetadata[] = await getBatchData(metadataList);
       setNftMetadata(batchMetadata);
     } catch (error) {
-      throw new Error('Failed to fetch data');
+        // a fallback if somehow metadata fetching from pinata fails
+        // 1) refetch
+        // 2) alternate api
     }
   }, []);
 
